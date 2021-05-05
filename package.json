@@ -1,0 +1,73 @@
+{
+  "name": "@aicacia/markdown",
+  "version": "0.1.0",
+  "description": "aicacia markdown",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aicacia/ts-markdown"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "doc": "typedoc --entryPoints src",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "ts-node node_modules/.bin/tape src/**/*.test.{ts,tsx} | tap-spec",
+    "bench": "ts-node node_modules/.bin/tape src/**/*.benchmark.{ts,tsx} | tap-spec",
+    "coverage": "nyc --reporter=lcov --check-coverage --lines=75 --require ts-node/register tape src/**/*.test.{ts,tsx} | tap-spec; nyc report ---reporter=text",
+    "clean": "rm -rf ./lib",
+    "lint": "eslint . --fix",
+    "prettier": "prettier --ignore-path ./.eslintignore --ignore-unknown --write .",
+    "preCommit": "npm run prettier && npm run lint && npm run coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run preCommit"
+    }
+  },
+  "keywords": [
+    "core",
+    "result",
+    "option",
+    "iter"
+  ],
+  "author": "Nathan Faucett",
+  "license": "(MIT OR Apache-2.0)",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "@types/tape": "4",
+    "@typescript-eslint/eslint-plugin": "4",
+    "@typescript-eslint/parser": "4",
+    "eslint": "7",
+    "eslint-config-prettier": "8",
+    "eslint-plugin-prettier": "3",
+    "husky": "4",
+    "nyc": "15",
+    "prettier": "2",
+    "tap-nyc": "1",
+    "tap-spec": "5",
+    "tape": "5",
+    "ts-node": "9",
+    "tslib": "2",
+    "typedoc": "0",
+    "typescript": "4"
+  },
+  "peerDependencies": {
+    "tslib": "2"
+  },
+  "nyc": {
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "src/**/*.test.*"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ]
+  },
+  "dependencies": {
+    "@ts-stack/markdown": "^1.4.0"
+  }
+}
